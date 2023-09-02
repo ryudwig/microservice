@@ -9,7 +9,9 @@ public class OrderItem extends BaseEntity<OrderItemId> {
     private OrderId orderId;
     private final Product product;
     private final int quantity;
+    // 단가
     private final Money price;
+    // 소계 (단가 X 수량)
     private final Money subTotal;
 
     void initializeOrderItem(OrderId orderId, OrderItemId OrderItemId) {
