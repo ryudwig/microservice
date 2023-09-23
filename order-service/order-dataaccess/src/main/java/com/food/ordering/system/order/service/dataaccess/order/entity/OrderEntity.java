@@ -27,6 +27,8 @@ public class OrderEntity {
     private OrderStatus orderStatus;
     private String failureMessages;
 
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
+
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private OrderAddressEntity address;
 

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name="order_items")
-@IdClass(OrderItemEntityId.class)
+@IdClass(OrderItemEntityId.class) // multi-column Primary Key Class 설정
 @Getter
 @Setter
 @Builder
