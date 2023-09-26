@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/orderw", produces = "application/vnd.api.v1+json")
+@RequestMapping(value = "/orders", produces = "application/vnd.api.v1+json")
 @Slf4j
 public class OrderController {
 

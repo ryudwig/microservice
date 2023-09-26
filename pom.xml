@@ -20,14 +20,9 @@
         <module>common</module>
         <module>common/common-application</module>
         <module>infrastructure</module>
-
         <module>infrastructure/kafka</module>
-        <module>infrastructure/kafka/kafka-config-data</module>
-        <module>infrastructure/kafka/kafka-model</module>
-        <module>infrastructure/kafka/kafka-consumer</module>
-        <module>infrastructure/kafka/kafka-producer</module>
+        <module>customer-service</module>
     </modules>
-
     <properties>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
