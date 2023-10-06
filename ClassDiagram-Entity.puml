@@ -1,0 +1,384 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.food.ordering.system.order.service.domain.entity.Customer",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_3148894 { 
+   	label=food
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1207113060 { 
+   	label=ordering
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   AggregateRoot978454693[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)AggregateRoot&lt;ID&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BaseEntity978454693[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BaseEntity&lt;ID&gt;</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   id: ID [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CreditEntry1194314564[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CreditEntry</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   customerId: CustomerId [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   totalCreditAmount: Money [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addCreditAmount(amount: Money)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ subtractAmount(amount: Money)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CreditHistory1194314564[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CreditHistory</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   amount: Money [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   customerId: CustomerId [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   transactionType: TransactionType [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Customer562081932[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Customer</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CustomerId1138024338[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CustomerId</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Money1138024338[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Money</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   amount: BigDecimal [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(money: Money): Money</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isGreaterThan(money: Money): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ multiply(multiplier: int): Money</TD></TR>
+<TR><TD ALIGN="LEFT" >- setScale(input: BigDecimal): BigDecimal</TD></TR>
+<TR><TD ALIGN="LEFT" >+ subtract(money: Money): Money</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Order562081932[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Order</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   customerId: CustomerId [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   deliveryAddress: StreetAddress [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   failureMessages: List&lt;String&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   items: List&lt;OrderItem&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   orderStatus: OrderStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: Money [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   restaurantId: RestaurantId [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   trackingId: TrackingId [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ approve()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ builder(): Builder</TD></TR>
+<TR><TD ALIGN="LEFT" >+ cancel(failureMessages: List&lt;String&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initCancel(failureMessages: List&lt;String&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initializeOrder()</TD></TR>
+<TR><TD ALIGN="LEFT" >- initializeOrderItems()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ pay()</TD></TR>
+<TR><TD ALIGN="LEFT" >- updateFailureMessages(failureMessages: List&lt;String&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- validateInitialOrder()</TD></TR>
+<TR><TD ALIGN="LEFT" >- validateItemPrice(orderItem: OrderItem)</TD></TR>
+<TR><TD ALIGN="LEFT" >- validateItemsPrice()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ validateOrder()</TD></TR>
+<TR><TD ALIGN="LEFT" >- validateTotalPrice()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+OrderEvent1819471057[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)OrderEvent</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   createdAt: ZonedDateTime [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   order: Order [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+OrderId1138024338[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)OrderId</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+OrderItem562081932[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)OrderItem</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   orderId: OrderId [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: Money [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   product: Product [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   quantity: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   subTotal: Money [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ builder(): Builder</TD></TR>
+<TR><TD ALIGN="LEFT" ># initializeOrderItem(orderId: OrderId, OrderItemId: OrderItemId)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Payment1194314564[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Payment</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   createdAt: ZonedDateTime [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   customerId: CustomerId [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   orderId: OrderId [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   paymentStatus: PaymentStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: Money [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ initializePayment()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateStatus(paymentStatus: PaymentStatus)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ validatePayment(failureMessages: List&lt;String&gt;)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Product562081932[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Product</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: Money [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ updateWithConfirmedNameAndPrice(name: String, price: Money)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Restaurant562081932[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Restaurant</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   active: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   products: List&lt;Product&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ builder(): Builder</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+RestaurantId1138024338[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RestaurantId</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+StreetAddress1522773785[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)StreetAddress</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   city: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   id: UUID [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   postalCode: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   street: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TrackingId1522773785[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TrackingId</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+AggregateRoot978454693 -> Customer562081932[arrowhead=none, arrowtail=empty, dir=both];
+AggregateRoot978454693 -> Order562081932[arrowhead=none, arrowtail=empty, dir=both];
+AggregateRoot978454693 -> Payment1194314564[arrowhead=none, arrowtail=empty, dir=both];
+AggregateRoot978454693 -> Restaurant562081932[arrowhead=none, arrowtail=empty, dir=both];
+BaseEntity978454693 -> AggregateRoot978454693[arrowhead=none, arrowtail=empty, dir=both];
+BaseEntity978454693 -> CreditEntry1194314564[arrowhead=none, arrowtail=empty, dir=both];
+BaseEntity978454693 -> CreditHistory1194314564[arrowhead=none, arrowtail=empty, dir=both];
+BaseEntity978454693 -> OrderItem562081932[arrowhead=none, arrowtail=empty, dir=both];
+BaseEntity978454693 -> Product562081932[arrowhead=none, arrowtail=empty, dir=both];
+Order562081932 -> CustomerId1138024338[label="customerId
+[0..1]"];
+Order562081932 -> Money1138024338[label="price
+[0..1]"];
+Order562081932 -> OrderItem562081932[label="items
+[0..*]"];
+Order562081932 -> RestaurantId1138024338[label="restaurantId
+[0..1]"];
+Order562081932 -> StreetAddress1522773785[label="deliveryAddress
+[0..1]"];
+Order562081932 -> TrackingId1522773785[label="trackingId
+[0..1]"];
+OrderEvent1819471057 -> Order562081932[label="order
+[0..1]"];
+Payment1194314564 -> CustomerId1138024338[label="customerId
+[0..1]"];
+Payment1194314564 -> Money1138024338[label="price
+[0..1]"];
+Payment1194314564 -> OrderId1138024338[label="orderId
+[0..1]"];
+Restaurant562081932 -> Product562081932[label="products
+[0..*]"];
+    
+}
+@enduml
