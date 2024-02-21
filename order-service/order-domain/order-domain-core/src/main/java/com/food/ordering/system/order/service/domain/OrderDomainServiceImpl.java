@@ -1,6 +1,7 @@
 package com.food.ordering.system.order.service.domain;
 
 import com.food.ordering.system.domain.DomainConstants;
+import com.food.ordering.system.domain.event.publisher.DomainEventPublisher;
 import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.entity.Product;
 import com.food.ordering.system.order.service.domain.entity.Restaurant;
@@ -17,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class OrderDomainServiceImpl implements OrderDomainService{
     @Override
-    public OrderCreatedEvent validateAndInitiateOrder(Order order, Restaurant restaurant) {
+    public OrderCreatedEvent validateAndInitiateOrder(Order order, Restaurant restaurant, DomainEventPublisher<OrderCreatedEvent> orderCreatedEventDomainEventPublisher) {
         // 레스토랑의 활성화 여부 확인
         validateRestaurant(restaurant);
         // Order 내 OrderItems에 레스토랑의 Product 정보를 기준으로 name과 price 정보 넣어주기
@@ -31,13 +32,18 @@ public class OrderDomainServiceImpl implements OrderDomainService{
         order.validateOrder();
         order.initializeOrder();
         log.info("Order with id: {} is initiated", order.getId().getValue());
-        return new OrderCreatedEvent(order, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+        return new OrderCreatedEvent(order,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
+                orderCreatedEventDomainEventPublisher);
     }
     @Override
-    public OrderPaidEvent payOrder(Order order) {
+    public OrderPaidEvent payOrder(Order order,
+                                   DomainEventPublisher<OrderPaidEvent> orderPaidEventDomainEventPublisher) {
         order.pay();
         log.info("Order with is: {} is paid", order.getId().getValue());
-        return new OrderPaidEvent(order, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+        return new OrderPaidEvent(order,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
+                orderPaidEventDomainEventPublisher);
     }
 
     @Override
@@ -47,10 +53,14 @@ public class OrderDomainServiceImpl implements OrderDomainService{
     }
 
     @Override
-    public OrderCancelledEvent cancelOrderPayment(Order order, List<String> failureMessages) {
+    public OrderCancelledEvent cancelOrderPayment(Order order,
+                                                  List<String> failureMessages,
+                                                  DomainEventPublisher<OrderCancelledEvent> orderCancelledEventDomainEventPublisher) {
         order.initCancel(failureMessages);
         log.info("Order with is: {} is cancelling", order.getId().getValue());
-        return new OrderCancelledEvent(order, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+        return new OrderCancelledEvent(order,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
+                orderCancelledEventDomainEventPublisher);
     }
 
     @Override
@@ -73,9 +83,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
                             if(currentProduct.equals(restaurantProduct)){
                                 currentProduct.updateWithConfirmedNameAndPrice(restaurantProduct.getName(), restaurantProduct.getPrice());
                             }
-                        }
-
-
-        ));
+                        })
+        );
     }
 }
